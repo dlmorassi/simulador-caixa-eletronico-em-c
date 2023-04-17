@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct cliente {
+    char nome[50];
+    char usuario[50];
+    int senha;
+};
+
+int main() {
+    struct cliente c;
+    char resposta;
+    printf("Voce ja possui cadastro? (s/n)\n");
+    scanf(" %c", &resposta);
+    if(resposta == 's' || resposta == 'S'){
+        printf("Digite seu usuario:\n");
+        scanf("%s", c.usuario);
+        printf("Digite sua senha:\n");
+        scanf("%d", &c.senha);
+        while(strcmp(c.usuario, "caixa") != 0 || c.senha != 123){
+            printf("Usuario ou senha incorretos.\nDigite seu usuario novamente:\n");
+            scanf("%s", c.usuario);
+            printf("Digite sua senha:\n");
+            scanf("%d", &c.senha);
+        }
+        printf("Bem-vindo %s\n", c.nome);
+        menu();
+    } else {
+        printf("Cadastro:\nDigite seu nome:\n");
+        scanf("%s", c.nome);
+        printf("Digite seu usuario:\n");
+        scanf("%s", c.usuario);
+        printf("Digite sua senha:\n");
+        scanf("%d", &c.senha);
+        printf("Cadastro realizado com sucesso!\n");
+    }
+    
+    return 0;
+}
+
+void menu(){
+    int opcao = 0, saldo = 2000, saque = 0, deposito = 0;
+    do{
+        printf("digite a funcao desejada: \n0 para sair \n1 para saldo \n2 para saque \n3 para deposito \n");
+        printf("-------------------------------------------\n");
+        scanf("%d", &opcao);
+        
+        switch(opcao){
+            case 1:
+                printf("\nSALDO: %d \n", saldo);
+                break;
+            case 2:
+                printf("\nquanto deseja sacar? \n");
+                scanf("%d", &saque);
+                while(saque > saldo){
+                    printf("saldo inuficiente, digite novamente: \n");
+                    scanf("%d", &saque);
+                }
+                if(saque <= saldo){
+                    saldo = saldo - saque;
+                    printf("saque realizado! imprimindo %d reais... \n", saque);
+                }
+                break;
+            case 3:
+                printf("quanto deseja depositar? \n");
+                scanf("%d", &deposito);
+                saldo = saldo + deposito;
+                printf("%d reais depositados, obrigado! \n");
+                break;
+            default:
+                printf("obrigado, volte sempre!");
+                break;
+        }
+    }
+    while(opcao != 0);
+}
