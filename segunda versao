@@ -35,7 +35,8 @@ void menu2() {
     menu();
 }
 void menu(){
-    int opcao = 0, saldo = 2000, saque = 0, deposito = 0;
+    float saldo = 2000, saque = 0, deposito = 0;
+    int opcao = 0;
     do{
         printf("digite a funcao desejada: \n0 para sair \n1 para saldo \n2 para saque \n3 para deposito \n");
         printf("-----------------------------------\n");
@@ -43,25 +44,25 @@ void menu(){
         
         switch(opcao){
             case 1:
-                printf("\nSALDO: %d \n", saldo);
+                printf("\nSALDO: %.2f \n", saldo);
                 break;
             case 2:
                 printf("\nquanto deseja sacar? \n");
-                scanf("%d", &saque);
+                scanf("%f", &saque);
                 while(saque > saldo){
                     printf("saldo inuficiente, digite novamente: \n");
-                    scanf("%d", &saque);
+                    scanf("%f", &saque);
                 }
                 if(saque <= saldo){
                     saldo = saldo - saque;
-                    printf("saque realizado! imprimindo %d reais... \n", saque);
+                    printf("saque realizado! imprimindo %.2f reais... \n", saque);
                 }
                 break;
             case 3:
                 printf("quanto deseja depositar? \n");
-                scanf("%d", &deposito);
+                scanf("%f", &deposito);
                 saldo = saldo + deposito;
-                printf("%d reais depositados, obrigado! \n");
+                printf("%.2f reais depositados, obrigado!\n", deposito);
                 break;
             default:
                 printf("obrigado, volte sempre!");
