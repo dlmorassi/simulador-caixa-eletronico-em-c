@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <conio.h>
+
+void painel() {
+    system("cls");
+	printf("	      MENU\n");
+    menu();
+}
+void menu(){
+    float saldo = 194.57, saque = 0, deposito = 0;
+    int opcao = 0;
+    do{
+        system("color 0F");
+		printf("-----------------------------------\n");
+		printf("digite a funcao desejada: \n0 para sair \n1 para saldo \n2 para saque \n3 para deposito \n");
+        printf("-----------------------------------\n");
+        scanf("%d", &opcao);
+        
+        switch(opcao){
+            case 1:
+                printf("\nSALDO: %.2f \n", saldo);
+                break;
+            case 2:
+                printf("quanto deseja sacar? \n");
+                scanf("%f", &saque);
+                while(saque > saldo){
+					printf("saldo inuficiente, digite novamente: \n");
+                    scanf("%f", &saque);
+                }
+                if(saque <= saldo){
+                    saldo = saldo - saque;
+                    system("color 0F");
+					printf("saque realizado! imprimindo %.2f reais... \n", saque);
+                }
+                break;
+            case 3:
+                printf("quanto deseja depositar? \n");
+                scanf("%f", &deposito);
+                saldo = saldo + deposito;
+                printf("\n%.2f reais depositados, obrigado!\n", deposito);
+                break;
+            default:
+                printf("obrigado, volte sempre!\a");
+                exit;
+        }
+    }
+    while(opcao != 0);
+}
+
+int main() {
+    //system ("cls");
+	char cadastro[50], usuario[50];
+    int senha1, senha2;
+    printf("--------------CADASTRO--------------\n\n");
+    printf("digite um nome de usuario: ");
+    scanf("%s", cadastro);
+    printf("digite uma senha numerica: ");
+    scanf("%d", &senha1);
+    printf("cadastro realizado com sucesso! \n");
+    printf("\n------------------------------------\n");
+    system("cls");
+	printf("--------------LOGIN---------------");
+	printf("\ndigite seu usuario: \n");
+    scanf("%s", usuario);
+    printf("digite sua senha: \n");
+    scanf("%d", &senha2);
+    while(strcmp(cadastro, usuario) != 0 || senha1 != senha2){
+        printf("usuario ou senha incorretos.\ndigite o usuario:\n");
+        scanf("%s", usuario);
+        printf("digite sua senha \n");
+        scanf("%d", &senha2);
+    }
+    if(strcmp(cadastro, usuario) == 0 && senha1 == senha2){
+        printf("bem-vindo %s!\n", usuario);
+        painel();
+    }
+
+    return 0;
+}
