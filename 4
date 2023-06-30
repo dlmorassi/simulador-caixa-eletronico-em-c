@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void painel(){
+	system("cls");
+	printf("			MENU\n\n");
+	menu();
+}
+
+void menu(){
+	int opcao;
+	float saque, deposito, saldo = 1000000, rendimento, tempo;
+	do{
+		printf("digite: \n0 para sair \n1 para saque \n2 para deposito \n3 para saldo \n4 para ver quanto rende seu saldo na poupança \n");
+		scanf("%d", &opcao);
+		switch(opcao){
+			case 1:
+				printf("quanto deseja sacar?  R$ ");
+				scanf("%f", &saque);
+				if(saque>saldo){
+					printf("saldo invalido, digite o valor novamente:  R$ ");
+					scanf("%f", &saque);
+				}
+				if(saque<=saldo){
+					saldo = saldo - saque;
+					printf("realizando saque de R$ %.2f", saque);
+					for(int i=0; i<3; i++){
+						printf(".");
+						Sleep(500);
+					}
+					printf("saldo atual: %.2f", saldo);
+					printf("\n");
+				}
+				break;
+			
+			case 2:
+				printf("quanto deseja depositar?  R$ ");
+				scanf("%f", &deposito);
+				saldo = saldo + deposito;
+				printf("deposito realizado no valor de R$ %.2f", deposito);
+				for(int i=0; i<3; i++){
+					printf(".");
+					Sleep(500);
+				}
+				printf("saldo atual: %.2f", saldo);
+				printf("\n");
+				break;
+			
+			case 3:
+				printf("saldo atual: R$ %.2f\n", saldo);
+				break;
+			
+			case 4:
+				printf("quanto tempo deseja deixar rendendo?  ");
+				scanf("%f", &tempo);
+				rendimento = saldo * (1 + (tempo * 0.05));
+				printf("seu rendimento seria de R$ %.2f", rendimento);
+		}	
+	}while(opcao!=0);
+	printf("obrigado, volte sempre!\n");
+	Sleep(1000);
+}
+
+int main(){
+	char cadastro[30], login[30];
+	int senha_cad, senha_log;
+	printf("----------------------CADASTRO----------------------\n\n");
+	printf("digite um nome de usuario para cadastrar:  ");
+	scanf("%s", cadastro);
+	printf("digite uma senha numerica para cadastrar:  ");
+	scanf("%d", &senha_cad);
+	for(int i=0; i<3; i++){
+		printf(".");
+		Sleep(500);
+	}
+	system("cls");
+	printf("------------------------LOGIN-------------------------\n\n");
+	printf("digite seu usuario:  ");
+	scanf("%s", login);
+	printf("digite sua senha cadastrada:  ");
+	scanf("%d", &senha_log);
+	while(strcmp(cadastro, login) != 0 || senha_cad != senha_log){
+		printf("usuario ou senha incorretos... \ndigite seu usuario novamente:  ");
+		scanf("%s", login);
+		printf("digite sua senha:  ");
+		scanf("%d", &senha_log);
+	}
+	if(strcmp(cadastro, login) == 0 && senha_cad == senha_log){
+		painel();
+	}
+	
+	return 0;
+}
